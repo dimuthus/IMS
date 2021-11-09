@@ -27,7 +27,7 @@
                                     <th>Product Code</th>
                                     <th>Quantity</th>
                                     <th>Category</th>
-                                    <th>Buying Price</th>
+                                    <th>Buying Price(Rs)</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -38,7 +38,7 @@
                                     <td>{{product.p_code}}</td>
                                     <td>{{product.p_quantity}}</td>
                                     <td>{{product.category.name}}</td>
-                                    <td>{{product.buying_price}} Tk</td>
+                                    <td>{{product.buying_price}}</td>
                                     <td>
                                         <div v-if="product.p_quantity > 0" class="badge badge-success">Available</div>
                                         <div v-else="" class="badge badge-danger">Stock Out</div>

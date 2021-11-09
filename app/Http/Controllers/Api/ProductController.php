@@ -19,7 +19,7 @@ class ProductController extends Controller
         return response()->json($products);
     }
     public function allProducts(){
-        $products = Product::latest()->paginate(2);
+        $products = Product::all();
         return response()->json($products);
     }
 
@@ -64,6 +64,7 @@ class ProductController extends Controller
             $p->selling_price = $request->selling_price;
             $p->root = $request->root;
             $p->p_quantity = $request->p_quantity;
+            $p->p_discount = $request->p_discount;
             $p->save();
             return response()->json(['success'=>'Add Product']);
     }
@@ -97,7 +98,6 @@ class ProductController extends Controller
             'buying_price'=>'nullable|numeric',
             'selling_price'=>'required|numeric',
 
-
         ]);
 
         $p = Product::where('id',$id)->first();
@@ -125,6 +125,7 @@ class ProductController extends Controller
             $p->selling_price = $request->selling_price;
             $p->root = $request->root;
             $p->p_quantity = $request->p_quantity;
+            $p->p_discount = $request->p_discount;
             $p->save();
             return response()->json(['success'=>'Update Product']);
     }

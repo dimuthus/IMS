@@ -3,6 +3,8 @@
 let login = require('./components/Auth/Login.vue').default;
 let register = require('./components/Auth/Register.vue').default;
 let logout = require('./components/Auth/Logout.vue').default;
+let me = require('./components/Auth/me.vue').default;
+
 // dashboard routes
 let home = require('./components/Home.vue').default;
 // employee routes
@@ -52,7 +54,7 @@ export  const routes = [
     {path:'/', component: login, name:'login'},
     {path:'/register', component: register, name:'register'},
     {path:'/logout', component: logout, name:'logout'},
-
+    {path:'/me', component: me, name:'me'},
     {path:'/home', component: home, name:'home'},
 // employee routes
     {path:'/add-employee', component: empCreate, name:'empAdd'},

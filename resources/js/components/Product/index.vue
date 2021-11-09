@@ -1,46 +1,42 @@
 <template>
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex">
-                            <div>
-                                <h4>All Products</h4>
-                            </div>
-                            <div>
-                                <input type="text" class="form-control mr-50" placeholder="Search" v-model="searchFillter" @keyup="searchProduct">
-                            </div>
-                            <div>
-                                <router-link :to="{name:'productCreate'}" class="btn btn-success">Add Product</router-link>
-                            </div>
-                        </div>
+   
+					    <div class="section-body">
 
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-md">
-                                <tbody><tr>
+						
+                            <table class="table table-striped table-md" id="sudupuka">
+                                <thead>
+								<tr>
 
                                     <th>Photo</th>
                                     <th>Product Name</th>
+									<th>Product Code</th>
                                     <th>Quantity</th>
                                     <th>Category</th>
                                     <th>Supplier</th>
-                                    <th>Selling Price</th>
+                                    <th>Selling Price(Rs)</th>
+                                    <th>Buying Price(Rs)</th>
+                                    <th>Discount(%)</th>
                                     <th>Buying Date</th>
                                     <th>Root</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Edit</th>
+									<th>Delete</th>
+
                                 </tr>
+								</thead>
+								<tbody>
                                 <tr v-for="product in searchProduct" :key="product.id">
 
                                     <td><img :src="product.image" alt="image" style="width:60px;height:50px"></td>
                                     <td>{{product.p_name}}</td>
+									<td>{{product.p_code}}</td>
+
                                     <td>{{product.p_quantity}}</td>
                                     <td>{{product.category.name}}</td>
                                     <td v-if="product.supplier != null">{{product.supplier.name}}</td>
                                     <td v-else=""></td>
-                                    <td>{{product.selling_price}} Tk</td>
+                                    <td>{{product.selling_price}}</td>
+                                    <td>{{product.buying_price}}</td>
+                                    <td>{{product.p_discount}}</td>
                                     <td>{{product.buying_date}}</td>
                                     <td>{{product.root}}</td>
 
@@ -52,49 +48,54 @@
                                         <a @click="productDel(product.id)" class="btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
-                                </tbody></table>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <nav class="d-inline-block">
-                            <ul class="pagination mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                </tbody>
+</table>
+	</div>							
+                      
 </template>
 
 <script>
+//Bootstrap and jQuery libraries
+import 'bootstrap/dist/css/bootstrap.min.css'; //for table good looks
+import 'jquery/dist/jquery.min.js';
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import "datatables.net-buttons/js/dataTables.buttons.js"
+import "datatables.net-buttons/js/buttons.colVis.js"
+import "datatables.net-buttons/js/buttons.flash.js"
+import "datatables.net-buttons/js/buttons.html5.js"
+import "datatables.net-buttons/js/buttons.print.js"
+import $ from 'jquery';  
+import axios from 'axios';
+
     export default {
         name: "index",
-        data(){
+		
+	 data(){
             return {
                 products:[],
                 searchFillter:'',
             }
         },
-        methods:{
-            allProduct(){
-                axios.get('api/products')
-                    .then(res=>{
-                        this.products = res.data;
-                        console.log(res.data)
-                    }).catch(error=>{console.log(error.response.data)});
+     methods:{
+        allProduct(){
+                axios.get("api/products").then((res)=>
+    {
+      this.products = res.data;
+      setTimeout(function(){ $('#sudupuka').DataTable(
+          {
+             pageLength: 5,
+             processing: true,
+             dom: 'Bfrtip',
+             buttons: ['copy', 'csv', 'print']
+          }
+      );
+      }, 500
+        );  
+    })
             },
+			
             productDel(id){
                 Swal.fire({
                     title: 'Are you sure?',
@@ -132,7 +133,6 @@
                 });
                 this.$router.push({name:'login'})
             }
-
         },
         computed:{
             searchProduct(){
@@ -144,6 +144,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>

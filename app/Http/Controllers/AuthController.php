@@ -60,6 +60,7 @@ class AuthController extends Controller
      */
     public function me()
     {
+		//die('ddd');
         return response()->json(auth()->user());
     }
 

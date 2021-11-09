@@ -8,7 +8,7 @@
                             <div class="row ">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pr-0 pt-3">
                                     <div class="card-content">
-                                        <h5 class="font-15">Today Income</h5>
+                                        <h5 class="font-15">Today Income {{this.getUser()}}</h5>
                                         <h2 class="mb-3 font-18">{{this.dayIncome}}</h2>
                                         <p class="mb-0"><span class="col-green">10%</span> Increase</p>
                                     </div>
@@ -171,6 +171,12 @@
                     .then(res=>{
                         this.dayExpense = res.data;
                     })
+            },
+            getUser(){
+                axios.post('api/auth/me')
+                    .then(res=>{
+                        this.dayExpense = res.data;
+                    })
             }
 
         },
@@ -187,6 +193,7 @@
             this.todayIncome();
             this.todaySell();
             this.todayExpense();
+            this.getUser();
         },
     }
 </script>

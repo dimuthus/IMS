@@ -16,8 +16,8 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-striped table-md">
-                                <tbody><tr>
+                            <table class="table table-striped table-md" id="myorders">
+                               <thead><tr>
                                     <th>Customer Name</th>
                                     <th>Total Quantity</th>
                                     <th>Total Price</th>
@@ -26,7 +26,9 @@
                                     <th>Pay By</th>
                                     <th>Date</th>
                                     <th>Action</th>
-                                </tr>
+                                </tr></thead>
+								
+								 <tbody>
                                 <tr v-for="order in orderSearch" :key="order.id">
                                     <td>{{order.name}}</td>
                                     <td>{{order.cart_quantity}}</td>
@@ -50,6 +52,19 @@
 </template>
 
 <script>
+//Bootstrap and jQuery libraries
+import 'bootstrap/dist/css/bootstrap.min.css'; //for table good looks
+import 'jquery/dist/jquery.min.js';
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import "datatables.net-buttons/js/dataTables.buttons.js"
+import "datatables.net-buttons/js/buttons.colVis.js"
+import "datatables.net-buttons/js/buttons.flash.js"
+import "datatables.net-buttons/js/buttons.html5.js"
+import "datatables.net-buttons/js/buttons.print.js"
+import $ from 'jquery';  
+import axios from 'axios';
     export default {
         name: "orders",
         data(){
@@ -63,6 +78,16 @@
                 axios.get('api/orders')
                     .then(res=>{
                         this.orders = res.data;
+						 setTimeout(function(){ $('#myorders').DataTable(
+          {
+             pageLength: 5,
+             processing: true,
+             dom: 'Bfrtip',
+             buttons: ['copy', 'csv', 'print']
+          }
+      );
+      }, 500
+        );
                     }).catch(error=>{console.log(error.response.data)});
             },
             orderDel(id){

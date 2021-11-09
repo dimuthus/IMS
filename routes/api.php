@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
+
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router) {
     Route::post('login', 'AuthController@login');
@@ -10,6 +16,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+
 });
 
 Route::group(['middleware' => 'api','namespace'=>'Api'],function ($router) {
@@ -17,6 +24,8 @@ Route::group(['middleware' => 'api','namespace'=>'Api'],function ($router) {
     Route::apiResource('suppliers','SupplierController');
     Route::apiResource('categories','CategoryController');
     Route::apiResource('products','ProductController');
+	Route::apiResource('users', 'UserController');
+
     Route::get('all-product','ProductController@allProducts');
     Route::apiResource('expenses','ExpenseController');
     Route::post('salary-pay/{id}','SalaryController@salaryPay');
@@ -35,6 +44,12 @@ Route::group(['middleware' => 'api','namespace'=>'Api'],function ($router) {
     Route::get('/cart-remove/{id}','CartController@cartRemove');
     Route::get('/cart-increment/{id}','CartController@cartIncrement');
     Route::get('/cart-decrement/{id}','CartController@cartDecrement');
+    Route::get('/cart-discount/{id}','CartController@cartDiscount');
+	Route::post('/cart-adjust-selling-price/','CartController@cartAdjustSellingPrice');
+	Route::post('/cart-adjust-selling-qty/','CartController@cartAdjustSellingQty');
+    Route::post('/cart-adjust-selling-discount/','CartController@cartAdjustSellingDiscount');
+
+
     Route::get('/cart-quantity/','CartController@cartQuantity');
     Route::get('/cart-subtotal/','CartController@cartSubtotal');
     Route::get('/carts-product-price-total/','CartController@cartsProductPrice');

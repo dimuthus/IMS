@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -20,8 +19,8 @@
     <link rel="stylesheet" href="{{asset('backEnd')}}/assets/bundles/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{asset('backEnd')}}/assets/bundles/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="{{asset('backEnd')}}/assets/css/custom.css">
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 
-    <link rel='shortcut icon' type='image/x-icon' href='{{asset('backEnd')}}/assets/img/favicon.ico' />
     <style>
         .hover a:hover{
             background: #83bceb !important;
@@ -66,16 +65,16 @@
                 <ul class="sidebar-menu">
                     <li class="menu-header">Main</li>
                     <li class="dropdown active">
-                        <router-link :to="{name: 'home'}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></router-link>
+                        <router-link :to="{name: 'home'}" class="nav-link"><i data-feather="monitor" stroke="red"></i><span>Dashboard</span></router-link>
                     </li>
 
                     <li class="hover" style="background-color:#83bceb">
-                        <router-link :to="{name: 'pointofsell'}" class="nav-link text-white"><i data-feather="monitor"></i><span>POS</span></router-link>
+                        <router-link :to="{name: 'pointofsell'}" class="nav-link text-white"><i data-feather="monitor" stroke="red"></i><span>POS</span></router-link>
                     </li>
 
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Orders</span></a>
+                                data-feather="briefcase" stroke="red"></i><span>Orders</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'todayOrder'}">Today Order</router-link></li>
                             <li><router-link class="nav-link" :to="{name: 'orders'}">Orders</router-link></li>
@@ -84,7 +83,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Employee</span></a>
+                                data-feather="briefcase" stroke="red"></i><span>Employee</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'empAdd'}">Add Employee</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'empIndex'}">All Employee</router-link></li>
@@ -94,7 +93,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Suppliers</span></a>
+                                data-feather="briefcase" stroke="red"></i><span>Suppliers</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'supAdd'}">Add Supplier</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'supIndex'}">All Supplier</router-link></li>
@@ -103,7 +102,7 @@
 
                      <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Categories</span></a>
+                                class="fas fa-award" stroke="red"></i><span>Categories</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'categoryCreate'}">Add Category</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'categoryIndex'}">All Category</router-link></li>
@@ -112,7 +111,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Products</span></a>
+                                data-feather="briefcase" stroke="red"></i><span>Products</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'productCreate'}">Add Product</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'productIndex'}">All Product</router-link></li>
@@ -121,46 +120,50 @@
 
                    <li class="dropdown">
                         <router-link :to="{name:'stock'}"><i
-                                data-feather="briefcase"></i><span>Stock</span></router-link>
+                                data-feather="briefcase" stroke="red"></i><span>Stock</span></router-link>
 
                     </li>
 
 
                       <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Expenses</span></a>
+                                data-feather="briefcase" stroke="red"></i><span>Expenses</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'expenseCreate'}">Add Expense</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'expenseIndex'}">All Expense</router-link></li>
                         </ul>
                     </li>
 
-
+<!--
                       <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Salary</span></a>
+                                data-feather="dollar-sign" stroke="red"></i><span>Salary</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'salaryEmp'}">Salary</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'all_salary'}">All Salary</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'salaryMonths'}">Each Month Salary</router-link></li>
                         </ul>
-                    </li>
+                    </li> -->
+                    <div class="adminview" style="display:none">
 
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                data-feather="briefcase"></i><span>Customers</span></a>
+                                data-feather="users" stroke="red"></i><span>Customers</span></a>
+						 		
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'customerCreate'}">Add Customer</router-link></li>
                             <li><router-link class="nav-link" :to="{name:'customerIndex'}">All Customer</router-link></li>
                         </ul>
                     </li>
-
+    </div>
 
 
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-cogs"></i><span>Settings</span></a>
                         <ul class="dropdown-menu">
                             <li><router-link class="nav-link" :to="{name: 'logout'}">Logout</router-link></li>
+							<li><router-link class="nav-link" :to="{name: 'me'}">me</router-link></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -181,7 +184,13 @@
 <script src="{{asset('js/app.js')}}"></script>
 <script>
     let token = localStorage.getItem('token');
+	let name = localStorage.getItem('user');
     if(token){
+        if (name=='admin'){
+			//alert('c');
+            $(".adminview").hide();
+
+        }
         $("topnav").css('display','');
         $("sidebar").css('display','')
     }

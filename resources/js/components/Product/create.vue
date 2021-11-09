@@ -62,7 +62,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Selling Price <span class="text-danger">*</span></label>
-                                        <input v-model="form.selling_price" type="number" class="form-control" placeholder="Selling Price">
+                                        <input v-model="form.selling_price" step="any" type="number" class="form-control" placeholder="Selling Price">
                                         <small class="text-danger" v-if="errors.selling_price">{{errors.selling_price[0]}}</small>
                                     </div>
                                 </div>
@@ -70,15 +70,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Buying Price</label>
-                                        <input v-model="form.buying_price" type="number" class="form-control" placeholder="Buying Price">
+                                        <input v-model="form.buying_price" step="any" type="number" class="form-control" placeholder="Buying Price">
                                         <small class="text-danger" v-if="errors.buying_price">{{errors.buying_price[0]}}</small>
                                     </div>
                                 </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Discount per item</label>
+                                        <input v-model="form.p_discount" type="number" step="any" class="form-control" placeholder="Discount">
+                                        <small class="text-danger" v-if="errors.p_discount">{{errors.p_discount[0]}}</small>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Product Quantity <span class="text-danger">*</span></label>
-                                        <input v-model="form.p_quantity" type="number" class="form-control" placeholder="Product Quantity">
+                                        <input v-model="form.p_quantity" type="number" step="any" class="form-control" placeholder="Product Quantity">
                                         <small class="text-danger" v-if="errors.p_quantity">{{errors.p_quantity[0]}}</small>
                                     </div>
                                 </div>
@@ -140,6 +146,7 @@
                     image:'',
                     buying_date:'',
                     p_quantity:'',
+                    p_discount:'',
                     root:'',
 
                 },

@@ -1,7 +1,19 @@
 require('./bootstrap');
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbvue/lib/css/mdb.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { BModal } from 'bootstrap-vue';
+
+Vue.component('b-modal', BModal);
+library.add(faCoffee);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(VueRouter);
 
 //sweetalert2

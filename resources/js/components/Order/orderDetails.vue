@@ -28,12 +28,12 @@
                                         Order Info
                                     </a>
                                     <a  class="list-group-item list-group-item-action"><strong>Product Quantity:</strong> {{orders.cart_quantity}}</a>
-                                    <a  class="list-group-item list-group-item-action"><strong>Sub Total:</strong> {{orders.sub_total}} Tk</a>
-                                    <a  class="list-group-item list-group-item-action"><strong>Vat:</strong> 5%</a>
-                                    <a class="list-group-item list-group-item-action"><strong>Total:</strong> {{orders.total}} Tk</a>
-                                    <a  class="list-group-item list-group-item-action"><strong>Pay:</strong> {{orders.pay}} Tk</a>
-                                    <a  class="list-group-item list-group-item-action"><strong>Due: </strong>{{orders.due}} Tk</a>
-                                    <a  class="list-group-item list-group-item-action"><strong>Payby: </strong>{{orders.payby}} Tk</a>
+                                    <a  class="list-group-item list-group-item-action"><strong>Sub Total(Rs):</strong> {{orders.sub_total}} </a>
+                                    <a  class="list-group-item list-group-item-action"><strong>Vat:</strong> 0%</a>
+                                    <a class="list-group-item list-group-item-action"><strong>Total(Rs):</strong> {{orders.total}} </a>
+                                    <a  class="list-group-item list-group-item-action"><strong>Pay(Rs):</strong> {{orders.pay}} </a>
+                                    <a  class="list-group-item list-group-item-action"><strong>Due: </strong>{{orders.due}} </a>
+                                    <a  class="list-group-item list-group-item-action"><strong>Payby: </strong>{{orders.payby}} </a>
                                 </div>
                             </div>
                         </div>
@@ -56,15 +56,17 @@
                                     <th>Product Name</th>
                                     <th>Code</th>
                                     <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
+                                    <th>Unit Price(Rs)</th>
+                                    <th>Buying Price(Rs)</th>
+                                    <th>Total(Rs)</th>
                                 </tr>
                                 <tr v-for="product in details" :key="product.id">
                                     <td><img :src="product.image" alt="image" style="width:60px;height:50px"></td>
                                     <td>{{product.p_name}}</td>
                                     <td>{{product.p_code}}</td>
                                     <td>{{product.product_quantity}}</td>
-                                    <td>{{product.product_price}} Tk</td>
+                                    <td>{{product.product_price}} </td>
+                                    <td>{{product.buying_price}} </td>
                                     <td>{{product.sub_total}}</td>
                                 </tr>
                                 </tbody></table>

@@ -27,6 +27,10 @@ class User{
             return localStorage.getItem('user');
         }
     }
+    token(){
+        const storeToken = localStorage.getItem('token');
+        return  storeToken;
+    }
     id(){
         if(this.loggedIn()){
             const payload = Token.payload(localStorage.getItem('token'));
